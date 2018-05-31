@@ -4,13 +4,11 @@ BRC=~/.bashrc;
 
 if [[ ! -f $BRC ]]; then 
   echo "bashrc is not in the usual location"; 
-  exit 1; 
+  #exit 1; 
 else
   if [[ -z `cat $BRC|grep ". ./dotfiles/scripts/modBashrc.sh"` ]]; then 
     echo "adding to .bashrc...";
-    echo ". ./dotfiles/scripts/modBashrc.sh" >> $BRC;
-  else 
-    exit 1 
+    echo ". ./dotfiles/scripts/modBashrc.sh" >> $BRC; 
   fi
 fi 
 
