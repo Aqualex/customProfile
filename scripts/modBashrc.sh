@@ -1,17 +1,16 @@
 #!/bin/bash
 
-BRC=~/.bashrc;
-path=`pwd`;  
+BRC=~/.bashrc; 
 
 if [[ ! -f $BRC ]]; then 
   echo "bashrc is not in the usual location"; 
 else
-  if [[ -z `cat $BRC|grep "source "$path"/modBashrc.sh"` ]]; then 
+  if [[ -z `cat $BRC|grep "source /home/$USER/dotfiles/scripts/modBashrc.sh"` ]]; then 
     echo "adding to .bashrc...";
     if [[ -z `cat $BRC|grep "#USER SCRIPTS"` ]];then 
       echo "#USER SCRIPTS" >> $BRC; 
     fi
-    echo "source "$path"/modBashrc.sh" >> $BRC; 
+    echo "source /home/$USER/dotfiles/scripts/modBashrc.sh" >> $BRC; 
   fi
 fi 
 
