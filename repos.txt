@@ -1,5 +1,1 @@
-git@github.com:vibronicshark55/dotfiles.git
-git@github.com:vibronicshark55/myfuncs.git
-git@github.com:vibronicshark55/segment-comparison.git
-git@github.com:vibronicshark55/yaq-vim.git
-https://github.com/tmux/tmux.git
+https://github.com/Aqualex/dotfiles.git

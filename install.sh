@@ -112,7 +112,7 @@ for arg in $arglist; do
 
     bashrc )
       if [ ! "source ~/.bash_custom" = "$(tail -n 1 ~/.bashrc)" ]; then
-        echo "adding to bashrc"                                         # add settings
+        echo "adding to bashrc..."                                      # add settings
         echo "source ~/.bash_custom" >> ~/.bashrc                       # ensure custom settings are picked up by bashrc
       fi
       if [ ! -f $HOME/.git-prompt.sh ]; then                            # check for existence of git-prompt.sh
@@ -132,6 +132,11 @@ for arg in $arglist; do
       read gitemail
       echo "setting email to $gitemail"
       git config --global user.email "$gitemail"
+ 
+      echo "input comment character"
+      read commentchar
+      echo "setting comment character to $commentchar"
+      git config core.commentchar $commentchar
     ;;
 
     vim )

@@ -15,6 +15,6 @@ if [ ! -f $HOME/.ssh/"$hn"_key ]; then                                  # check 
   return 0
 fi
 
-if [ ! -d $HOME/git/dotfiles ]; then
-  git clone git@github.com:vibronicshark55/dotfiles.git $HOME/git/dotfiles # clone dotfiles repo if it does not exist
+if [ ! -d $HOME/dotfiles ]; then
+  git clone https://github.com/Aqualex/dotfiles.git $HOME/dotfiles # clone dotfiles repo if it does not exist
 fi
