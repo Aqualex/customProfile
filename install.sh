@@ -111,6 +111,10 @@ for arg in $arglist; do
     ;;
 
     bashrc )
+      a=`ls -la ~/.|grep .bash_custom|wc -l`;
+      if [[ $a -eq 0 ]];then
+        touch ~/.bash_custom
+      fi
       if [ ! "source ~/.bash_custom" = "$(tail -n 1 ~/.bashrc)" ]; then
         echo "adding to bashrc..."                                      # add settings
         echo "source ~/.bash_custom" >> ~/.bashrc                       # ensure custom settings are picked up by bashrc
