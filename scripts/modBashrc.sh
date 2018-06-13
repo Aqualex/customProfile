@@ -1,12 +1,12 @@
 #!/bin/bash
 
-BRC=~/.bashrc; 
+BRC=~/.bash_custom; 
 
 if [[ ! -f $BRC ]]; then 
-  echo "bashrc is not in the usual location"; 
+  echo "bash_custom is not in the usual location"; 
 else
   if [[ -z `cat $BRC|grep "source /home/$USER/dotfiles/scripts/modBashrc.sh"` ]]; then 
-    echo "adding to .bashrc...";
+    echo "adding to .bash_custom...";
     if [[ -z `cat $BRC|grep "#USER SCRIPTS"` ]];then 
       echo "#USER SCRIPTS" >> $BRC; 
     fi

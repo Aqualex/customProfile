@@ -75,7 +75,7 @@ fi
 
 for arg in ${POSITIONAL[@]}; do
   if [ "all" = $arg ]; then
-    arg="repos dotfiles bashrc vim vundle scripts kdb tldr tmux_install"
+    arg="repos dotfiles bashrc git vim vundle scripts kdb"
   fi
 
   arglist="$arglist $arg"
