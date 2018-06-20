@@ -210,7 +210,10 @@ for arg in $arglist; do
     #add error handling in case package fails
     packages)
       echo "installing necessary packages..."
-      `sudo apt-get install net-tools`                                  #install net-tools packages. useful for ifconfig
+      echo "installing net-tools"
+      `sudo apt-get install net-tools`                          #install net-tools packages. useful for ifconfig
+      echo "installing openssh"
+      `sudo apt-get install openssh-server`
     ;;
 
     * )
