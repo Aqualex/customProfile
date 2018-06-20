@@ -75,7 +75,7 @@ fi
 
 for arg in ${POSITIONAL[@]}; do
   if [ "all" = $arg ]; then
-    arg="repos dotfiles bashrc git vim vundle scripts kdb"
+    arg="repos dotfiles bashrc git vim vundle scripts kdb packages"
   fi
 
   arglist="$arglist $arg"
@@ -204,6 +204,13 @@ for arg in $arglist; do
       make install
       cd -
       rm -rf /tmp/"$USER"dep/
+    ;;
+
+    #add check to see if the package is already installed
+    #add error handling in case package fails
+    packages)
+      echo "installing necessary packages..."
+      `sudo apt-get install net-tools`                                  #install net-tools packages. useful for ifconfig
     ;;
 
     * )
