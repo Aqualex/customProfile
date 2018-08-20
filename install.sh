@@ -167,7 +167,7 @@ for arg in $arglist; do
         echo "" >> $HOME/.bashrc
         echo "#USER DEFINED" >>$HOME/.bashrc
         echo "if [[ -f $HOME/.bash_envvar ]];then" >> $HOME/.bashrc
-        echo "  . .bash_envvar">>$HOME/.bashrc
+        echo "  . $HOME/.bash_envvar">>$HOME/.bashrc
         echo "fi" >> $HOME/.bashrc
       fi
 
