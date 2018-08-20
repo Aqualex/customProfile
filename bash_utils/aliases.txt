@@ -1,0 +1,3 @@
+alias NUKETOR='ps -aux|grep arisnov+|grep torq.q|awk '\''{print $2}'\''|xargs kill -9'
+alias RUNP='ps -aux | grep arisnov+ | awk '\''{for(i=0;i<=NF;i++)if($i=="-procname") print $(i+1)}'\'''
+
