@@ -1,6 +1,6 @@
-FROM=/media/alex/ED78-CEE3/ALEXHDD/*
-TO=/media/alex/alexhdd/ALEXHDD/.
-HDD=/media/alex/alexhdd
+FROM=***
+TO=***
+HDD=***
 
 sync(){
   echo "Sync started ... " >> /tmp/logs/syncHDD.txt
