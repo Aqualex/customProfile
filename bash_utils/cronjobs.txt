@@ -1,0 +1,1 @@
+* 23 * * * rsync -aq /media/alex/ED78-CEE3/ALEXHDD/* /media/alex/ED39-5BC4/ALEXHDD/. 

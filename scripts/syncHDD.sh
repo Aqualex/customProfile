@@ -1,13 +1,19 @@
+FROM=/media/alex/ED78-CEE3/ALEXHDD/*
+TO=/media/alex/alexhdd/ALEXHDD/.
+HDD=/media/alex/alexhdd
+
 sync(){
+  echo "Sync started ... " >> /tmp/logs/syncHDD.txt
   ##rsync location 
-  if [[ -d /media/alex/alexhdd/ ]];then
-    rsync -a /home/alex/ALEXHDD/* /media/alex/alexhdd/
+  if [[ -d $HDD ]];then
+    rsync -a $FROM $TO
   fi
+  echo "Sync HDD has finished ... " > /tmp/logs/syncHDD.txt
 }
 
 addcronjob(){
   ##check if cronjob already exists if not add it
-  echo "*/30 * * * * bash $HOME/dotfiles/scripts/syncHDD.sh" >> .mycron
+  echo "* 23 * * * bash $HOME/dotfiles/scripts/syncHDD.sh" >> .mycron
   crontab .mycron 
   rm .mycron
 }

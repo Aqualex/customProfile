@@ -264,7 +264,7 @@ for arg in $arglist; do
       echo "installing net-tools"
       `sudo apt-get install net-tools`                          #install net-tools packages. useful for ifconfig
       echo "installing openssh"
-      `sudo apt-get install openssh-server`
+      `sudo apt-get -V install openssh-server`
     ;;
 
     * )
