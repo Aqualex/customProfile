@@ -1,3 +1,5 @@
 export VISUAL=vim
 export EDITOR="$VISUAL"
 export QHOME=$HOME/q/
+export HDDFROM=/media/alex/ED78-CEE3/ALEXHDD/
+export HDDTO=/media/alex/alexhdd/ALEXHDD/
