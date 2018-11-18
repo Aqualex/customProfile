@@ -84,7 +84,7 @@ sync(){
 addcronjob(){
   ##check if cronjob already exists if not add it
   echo "[INFO]|$(gettimestamp)|Adding cronjob ..." >> $SYNCLOG
-  echo "* 23 * * * bash $HOME/dotfiles/scripts/syncHDD.sh" >> .mycron
+  echo "0 23 * * * bash $HOME/dotfiles/scripts/syncHDD.sh" >> .mycron
   crontab .mycron 
   echo "[INFO]|$(gettimestamp)|Cronjob added" >> $SYNCLOG
   rm .mycron
