@@ -1,4 +1,8 @@
+#!/bin/bash
 ##----------------------------------------------------------------------------------------------------------------------
+
+# - Before you start the program you will have to define HDDTO and HDDFROM.
+# - this program will add itself to the crontab and run every day at 23:00 
 
 ########################################################################################################################
 ##     FUNCTIONS DEFINITIONS                                                                                          ##
@@ -34,12 +38,12 @@ monitor(){
   while true 
     do 
       if [[ ! 0 -eq `ps aux|grep "[r]sync -a $HDDFROM $HDDTO"|wc -l` ]];then
-        sleep 60;
+        sleep 10;
         total=`du -sh $HDDFROM|awk '{print $1}'`
         sofar=`du -sh $HDDTO|awk '{print $1}'`
         echo "[INFO]|$(gettimestamp)|Process is still running: [TOTAL]: $total; [sofar]: $sofar" >> $SYNCLOG
       else 
-        echo "[ERROR]|$(gettimestamp)|Process has finshed ..."
+        echo "[INFO]|$(gettimestamp)|Process has finshed ..."
         break
       fi
     done  

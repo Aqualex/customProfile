@@ -75,7 +75,7 @@ fi
 
 for arg in ${POSITIONAL[@]}; do
   if [ "all" = $arg ]; then
-    arg="repos dotfiles bashrc git vim vundle scripts kdb packages"
+    arg="dotfiles bashrc git vim scripts kdb packages"
   fi
 
   arglist="$arglist $arg"
