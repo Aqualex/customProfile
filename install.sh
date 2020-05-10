@@ -75,7 +75,7 @@ fi
 
 for arg in ${POSITIONAL[@]}; do
   if [ "all" = $arg ]; then
-    arg="dotfiles bashrc git vim scripts kdb packages"
+    arg="dotfiles bashrc git vim scripts kdb packages htop"
   fi
 
   arglist="$arglist $arg"
@@ -84,6 +84,11 @@ done
 for arg in $arglist; do
 
   case $arg in
+    
+    htop)
+         echo "Installing htop ..."
+	 sudo apt install htop  
+    ;;
 
     repos )
       echo "cloning repos"                                              # clone necessary repos
@@ -111,70 +116,7 @@ for arg in $arglist; do
     ;;
 
     bashrc )
-      #this will create the .bash_aliases
-      if [[ 0 -eq `ls -la $HOME|grep .bash_aliases|wc -l` ]];then 
-        echo "bash_aliases does not exist in $HOME"
-        touch $HOME/.bash_aliases
-        if [[ -f bash_utils/aliases.txt ]];then
-          cat bash_utils/aliases.txt >> $HOME/.bash_aliases
-        else
-          echo "aliases.txt does not exist"
-        fi
-      elif [[ 0 -eq `cat $HOME/.bash_aliases|wc -l` ]];then
-        echo ".bash_aliases does exist but it is empty"
-        if [[ -f bash_utils/aliases.txt ]];then
-          cat bash_utils/aliases.txt >> $HOME/.bash_aliases
-        else
-          echo "aliases.txt does not exist" 
-        fi
-      else  
-        echo ".bash_aliases exists and not empty"
-         if [[ -f bash_utils/aliases.txt ]];then
-          echo "#USER DEFINED - USER:$USER DATE:`date`" >> $HOME/.bash_aliases
-          cat bash_utils/aliases.txt >> $HOME/.bash_aliases
-        else
-          echo "aliases.txt does not exist"
-        fi
-      fi 
-     
-      # 
-      if [[ 0 -eq `ls -la $HOME|grep .bash_envvar|wc -l` ]];then                                    #check if bash_envvar exists 
-        echo "bash_envvar does not exist in $HOME"
-        touch $HOME/.bash_envvar                                                                    #create bash_envvar if not 
-        if [[ -f bash_utils/envvariables.txt ]];then                                                #check if envvariables.txt exists 
-          cat bash_utils/envvariables.txt >> $HOME/.bash_envvar                                     #copy the envvariables to bash_envvar
-        else 
-          echo "envvariables.txt does not exist"
-        fi                   
-      elif [[ 0 -eq `cat $HOME/.bash_envvar|wc -l` ]];then                                          #check if bash_envvar is empty 
-        echo ".bash_envvar does exist but it is empty"                
-        if [[ -f bash_utils/envvariables.txt ]];then                                                #if bash_envvar exist but empty  
-          cat bash_utils/envvariables.txt >> $HOME/.bash_envvar                                     #copy contents from envvariables.txt
-        else
-          echo "envvariables.txt does not exist"
-        fi
-      else
-        echo ".bash_envvar exists and not empty"                                                    #if bash_envvar exist and not empty
-         if [[ -f bash_utils/envvariables.txt ]];then                                               #if bash_envvar exist but empty
-           echo "#USER DEFINED - USER:$USER DATE:`date`" >> $HOME/.bash_envvar                      #add title if bash_envvar already exists
-           cat bash_utils/envvariables.txt >> $HOME/.bash_envvar                                    #copy contents from envvariables.txt
-         fi
-      fi
- 
-      #checking if the bash_envvar is sourced   
-      if [[ 0 -eq `cat $HOME/.bashrc|grep ".bash_envvar"|wc -l` ]];then 
-        echo "adding to .bashrc"
-        echo "" >> $HOME/.bashrc
-        echo "#USER DEFINED" >>$HOME/.bashrc
-        echo "if [[ -f $HOME/.bash_envvar ]];then" >> $HOME/.bashrc
-        echo "  . $HOME/.bash_envvar">>$HOME/.bashrc
-        echo "fi" >> $HOME/.bashrc
-      fi
-
-      if [ ! -f $HOME/.git-prompt.sh ]; then                            # check for existence of git-prompt.sh
-        echo "fetching git-prompt.sh"                                   # get git prompt script
-        wget -O $HOME/.git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
-      fi
+      echo "Installation process for bashrc is not defined ..."
     ;;
 
     git )
