@@ -221,7 +221,70 @@ for arg in $arglist; do
     ;;
 
     kdb )
-      source $rootc/kdb_install.sh
+      echo "Installing kdb ..."
+      echo "Make sure to copy *.zip file and kc.lic in $PWD/instaPackages/kdb"
+      read -p "Are the required files present? : [Y/N]" answer
+      if [[ ! $answer == "Y" ]];then
+          echo "Reexecute this file like -> bash install.sh kdb"
+          break
+      fi
+  
+      #check if folder kdb exists in instPackages
+      if [[ 0 -eq `find $PWD/instPackages/. -type d -name kdb | wc -l` ]];then
+           echo "Folder kdb does not exist. Function will be aborted ..."
+	   exit 
+      fi 
+
+      #check if folder kdb exists in unzipped 
+      if [[ 0 -eq `find $PWD/unzipped/. -type d -name q | wc -l` ]];then
+           echo "Creating folder in $PWD/unzipped/"
+	   mkdir -p $PWD/unzipped/q
+      fi 
+
+      echo "Unzipping files present in $PWD/instPackages/kdb ..."
+      if [[ 0 -eq `find $PWD/instPackages -name *.zip | wc -l` ]];then 
+           echo "There is no zip file in the target directory. Doing nothing"
+      else
+	 #if folder unzipped/kdb/ is not empty clean and unzip
+	 if [[ 0 -ne `ls $PWD/unzipped/q/. | wc -l` ]];then
+	      echo "Folder $PWD/unzipped/q/ is not empty. Clearing contents ..."
+	      rm -rf $PWD/unzipped/q/* 
+	 fi
+        
+	 unzip $PWD/instPackages/kdb/*.zip -d $PWD/unzipped/q/.
+	 cp $PWD/instPackages/kdb/*.lic $PWD/unzipped/q/. 
+       fi
+
+       echo "Moving folder from $PWD/unzipped/q to $HOME"
+       mv $PWD/unzipped/q $HOME
+
+       echo "Adding necessary variables for kdb to work"
+       echo "Attempting to .bashrc_qkdb_aliase.sh which will be source in .bashrc"
+       if [[ -f $HOME/.bashrc_qkdb_alias.sh ]];then
+            echo "File .bashrc_qkdb_alias.sh already exists"
+       else 
+            echo "Creating file .bashrc_qkdb_alias.sh in $HOME..."
+	    touch $HOME/.bashrc_qkdb_alias.sh
+	    echo "#Setting necessary aliases" >> $HOME/.bashrc_qkdb_alias.sh
+	    echo "alias q=\"QHOME=$HOME/q rlwrap -r $HOME/q/l64/q\"" >> $HOME/.bashrc_qkdb_alias.sh
+	    echo " " >> $HOME/.bashrc_qkdb_alias.sh
+	    echo "#Setting necessary environment variables" >> $HOME/.bashrc_qkdb_alias.sh
+	    echo "export QLIC $HOME/q" >> $HOME/.bashrc_qkdb_alias.sh
+       fi
+
+       echo "Attempting to add file $HOME/.bashrc_qkdb_alias.sh to .bashrc"
+       if [[ 0 -eq `cat $HOME/.bashrc | grep .bashrc_qkdb_alias.sh | wc -l` ]];then
+            echo "Seems like $HOME/.bashrc_qkdb_alias.sh is not sourced in .bashrc Adding now ..."
+	    echo "" >> $HOME/.bashrc
+	    echo "#Sourcing variables necessary for kdb/q+"
+	    echo "" >> $HOME/.bashrc
+	    echo "if [[ -f $HOME/.bashrc_qkdb_alias.sh ]];then" >> $HOME/.bashrc
+            echo "  echo \"Sourcing $HOME/.bashrc_qkdb_alias.sh\"" >> $HOME/.bashrc
+            echo "  source $HOME/.bashrc_qkdb_alias.sh" >> $HOME/.bashrc
+            echo "else" >> $HOME/.bashrc
+            echo "  echo \"File .bashrc_qkdb_alias.sh does not exist\"" >> $HOME/.bashrc
+            echo "fi" >> $HOME/.bashrc
+       fi
     ;;
 
     tldr )
@@ -262,9 +325,9 @@ for arg in $arglist; do
     packages)
       echo "installing necessary packages..."
       echo "installing net-tools"
-      `sudo apt-get install net-tools`                          #install net-tools packages. useful for ifconfig
+      sudo apt-get install net-tools                          #install net-tools packages. useful for ifconfig
       echo "installing openssh"
-      `sudo apt-get -V install openssh-server`
+      sudo apt-get -V install openssh-server
     ;;
 
     * )
