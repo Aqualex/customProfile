@@ -248,6 +248,22 @@ for arg in $arglist; do
         cd -
       fi
     ;;
+    steam)
+         echo "Installing steam in $HOME/steam/ ..."
+	 mkdir -p $HOME/steam
+	 wget --directory-prefix $HOME/steam/ https://steamcdn-a.akamaihd.net/client/installer/steam.deb 
+	 if [[ ! 1 -eq `ls $HOME/steam/ | grep *.deb | wc -l` ]];then 
+              echo "Something went wrong downloading steam. Please check"
+	      break
+	 else 
+	      echo "Installing ..."
+	      sudo dpkg -i $(find $HOME/steam -name *.deb)
+	 fi
+    ;;
+   tree)
+         echo "Installing tree command .."
+	 sudo apt install tree 
+    ;;
 
     libevent )
       echo "getting libevent"
