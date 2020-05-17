@@ -211,7 +211,8 @@ for arg in $arglist; do
 	    echo "alias q=\"QHOME=$HOME/q rlwrap -r $HOME/q/l64/q\"" >> $HOME/.bashrc_qkdb_alias.sh
 	    echo " " >> $HOME/.bashrc_qkdb_alias.sh
 	    echo "#Setting necessary environment variables" >> $HOME/.bashrc_qkdb_alias.sh
-	    echo "export QLIC $HOME/q" >> $HOME/.bashrc_qkdb_alias.sh
+	    echo "export QLIC=$HOME/q" >> $HOME/.bashrc_qkdb_alias.sh
+	    echo "export SSL_CA_CERT_FILE=$HOME/certs/cabundle.pem"
        fi
 
        echo "Attempting to add file $HOME/.bashrc_qkdb_alias.sh to .bashrc"
@@ -227,6 +228,11 @@ for arg in $arglist; do
             echo "  echo \"File .bashrc_qkdb_alias.sh does not exist\"" >> $HOME/.bashrc
             echo "fi" >> $HOME/.bashrc
        fi
+
+       echo "Installing necessary certificates..."
+       mkdir $HOME/certs 
+       curl curl https://curl.haxx.se/ca/cacert.pem > $HOME/certs/cabundle.pem
+
     ;;
 
     tldr )
